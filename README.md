@@ -4,6 +4,9 @@ SPyTEx
 _(this is still in early development, features will be added mostly according
 to internal needs, see planned features section at the end)_
 
+[![PyPI](https://img.shields.io/pypi/v/spytex)](https://pypi.org/project/spytex/)
+[![Build Status](https://travis-ci.org/rrobby86/spytex.svg?branch=master)](https://travis-ci.org/rrobby86/spytex)
+
 **SPyTEx** (_Simple Python Task Executor_) is a small library and CLI utility
 allowing to run arbitrary tasks defined in your Python code as ordinary
 functions and configured through simple but flexible JSON-based specifications.
