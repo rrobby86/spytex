@@ -41,6 +41,8 @@ def _(obj):
                 return Call(NameReference(key), [arg])
         elif key == "=":
             return ContextValue(val)
+        elif key == ".":
+            return NameReference(val)
     elif "=" in obj:
         obj = obj.copy()
         values = _compile_dict_vals(obj.pop("="))

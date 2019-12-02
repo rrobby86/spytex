@@ -123,6 +123,22 @@ from sklearn.svm import SVC
 train_model(data='trainset.csv', model=SVC(C=0.1, kernel='poly', degree=3))
 ```
 
+To get a named object without calling it (e.g. a constant or a function to be
+passed to an higher-order one), use `{".": "dotted.name"}`.
+
+```
+{
+  "!": "acme.learn.train_model",
+  "data": "trainset.csv",
+  "model_class": {".": "sklearn.svm.SVC"}
+}
+
+# equivalent to:
+from acme.learn import train_model
+from sklearn.svm import SVC
+train_model(data='trainset.csv', model_class=SVC)
+```
+
 Some convenient "magic" calls in the form `{"!name": "argument"}` are provided
 for common operations. Currently supported magic functions are:
 
