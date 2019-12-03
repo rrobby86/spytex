@@ -1,11 +1,15 @@
 language: python
+
 python:
-- "3.5"
-- "3.6"
-- "3.7"
+  - "3.5"
+  - "3.6"
+  - "3.7"
+  - "3.8"
+
 install:
   - pip install .
   - pip install pytest
+
 script:
   - cd tests && pytest
 
@@ -16,5 +20,5 @@ deploy:
   password:
     secure: "wD6A7nl+EkxR+qW4o1CbpxgumOqkUIVab46K1K853Hs9BrAu63Wr3IscXR6mhmyuKmwbqUns0uOrqUD4gSoykeBHSCqwKn4QoeRjEFXdkGT3Vv5WbL2Js/GCkR4dR+wH9x00WwAe19yLpvB8ZZjgvsEbnvO/MVEZ8YHElHUBtLi9rfMDd0AWyahVxILpHcoOsdsP1JtY0LnzNSyTT4mhTmLYI9Mb6Aay2opdUG2QQFF+NpHyzjTaos0mAnQMtzzaRTjn48Y6+W4KVWpMKoRGhgGQh3EnJcpg4h6sFdCwK4FxvFJk2vQES2OFAaSs+GujntD6XujW6qfOV2pT2NKynI6Qns9rqfpGQnB6XsGx91hwMecFU5DKole1MfC4tIbP83lqHMaHLroOBTDG7R7V1P//lRF0KHSTVg6ItyL0u0f+c6/P/DHP+fpvwWspJL3H1pQ8+9Z8elyfWVGJfiDG4r6S/oZ/yDf1wQ7JxGtgI7/czmXUU504/k96Gcs6qB64s2KfFdAZ9pdI2+zLdYHHO9LqREX64CTZYEUkaZp/xD4O7a1qDNTaImfcGUeaQu31j62JX6AhR48QNpNi5JRbHmF4ge/mfQMMPDy85plXu7P+PJB0wqQ+PO0bPm+3VbwmtHca8ZS/xVRwfje4dvI+oKwr+hRKp6cXY+V8jVTC2NA="
   on:
-    branch: master
     tags: true
+    python: 3.5
