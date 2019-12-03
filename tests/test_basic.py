@@ -21,3 +21,4 @@ test_pow_bind_run = task_returns("pow_bind_run.json", 81)
 # magics
 test_pow_run = task_returns("pow_run.json", 81)
 test_pow_unpickle = task_returns("pow_unpickle.json", 81)
+test_env_foo = task_returns("env_foo.json", "foo")

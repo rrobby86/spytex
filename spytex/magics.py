@@ -1,6 +1,7 @@
 """Magic functions available in task specifications."""
 
 
+import os
 import pickle
 
 from smart_open import open
@@ -21,6 +22,11 @@ def do_run(filename, context):
     """Runs the task specified in the given file."""
     from .api import run   # here to avoid circular import
     return run(filename, context)
+
+
+def do_env(name):
+    """Gets the value of an environment variable."""
+    return os.getenv(name)
 
 
 def do_unpickle(filename):

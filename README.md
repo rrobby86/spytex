@@ -146,6 +146,8 @@ Some convenient "magic" calls in the form `{"!name": "argument"}` are provided
 for common operations. Currently supported magic functions are:
 
 - `!run`: invokes the task in the specified file and returns its result
+- `!env`: returns the value of the specified environment variable (`None` if
+  undefined)
 - `!unpickle`: returns an object deserialized from given file using
   `pickle.load` **(do not unpickle untrusted files!)**
 

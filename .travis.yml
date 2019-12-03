@@ -6,6 +6,9 @@ python:
   - "3.7"
   - "3.8"
 
+env:
+  - SPYTEX_TEST_FOO=foo
+
 install:
   - pip install .
   - pip install pytest
