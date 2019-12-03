@@ -9,6 +9,7 @@ test_pow = task_returns("pow.json", 9)
 test_date_kw = task_returns("date_kw.json", date(2019, 11, 29))
 test_date_pos = task_returns("date_pos.json", date(2019, 11, 29))
 test_pow_nested = task_returns("pow_nested.json", 81)
+test_list_noarg = task_returns("list_noarg.json", [])
 test_range_short = task_returns("range_short.json", range(4))
 test_ref_pi = task_returns("pi.json", pi)
 
