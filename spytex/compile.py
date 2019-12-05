@@ -1,12 +1,11 @@
 """Functions to extract Definitions from JSON-like objects representation."""
 
 
-from functools import singledispatch
 import collections.abc
 from typing import Any, Mapping
 
 from .defs import (Definition, ConcreteValue, NameReference, Call, SeqDef,
-                   DictDef, ContextValue, ContextBinder)
+                   DictDef, ContextValue, ContextBinder, SequentialRun)
 from .magics import get_magic
 
 
@@ -21,6 +20,17 @@ def compile(obj: Any) -> Definition:
             key, val = next(iter(obj.items()))
             if key.startswith("!"):
                 key = key[1:]
+                if key == "sequential":
+                    steps = []
+                    for step in val:
+                        name = None,
+                        if (isinstance(step, collections.abc.Mapping)
+                                and ":=" in step):
+                            step = step.copy()
+                            name = step.pop(":=")
+                        step = compile(step)
+                        steps.append((step, name))
+                    return SequentialRun(steps)
                 if key:
                     arg = compile(val)
                 magic = get_magic(key)

@@ -22,3 +22,8 @@ test_pow_bind_run = task_returns("pow_bind_run.json", 81)
 test_pow_run = task_returns("pow_run.json", 81)
 test_pow_unpickle = task_returns("pow_unpickle.json", 81)
 test_env_foo = task_returns("env_foo.json", "foo")
+
+# sequential
+test_seq_one = task_returns("seq_one.json", 9)
+test_seq_two = task_returns("seq_two.json", 16)
+test_seq_two_var = task_returns("seq_two_var.json", 81)

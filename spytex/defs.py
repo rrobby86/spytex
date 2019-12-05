@@ -3,7 +3,8 @@
 
 from abc import ABC, abstractmethod
 from pydoc import locate
-from typing import Any, Iterable, Sequence, Mapping, Type, Union
+from typing import (Any, Iterable, Mapping, Optional, Sequence, Tuple, Type,
+                    Union)
 
 from .context import ResolutionContext
 
@@ -119,3 +120,20 @@ class ContextBinder(Definition):
                          for key, val in self.values.items()}
         inner_context = context.update_vals(resolved_vals)
         return self.wrapped.resolve(inner_context)
+
+
+class SequentialRun(Definition):
+    """Wraps definitions to be resolved in given order."""
+
+    __slots__ = "defs"
+
+    def __init__(self, defs: Sequence[Tuple[Definition, Optional[str]]]):
+        self.defs = defs
+
+    def resolve(self, context: ResolutionContext):
+        result = None
+        for item, name in self.defs:
+            result = item.resolve(context)
+            if name is not None:
+                context = context.update_vals({name: result})
+        return result
