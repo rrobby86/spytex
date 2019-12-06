@@ -24,6 +24,12 @@ def do_run(filename, context):
     return run(filename, context)
 
 
+@accepts_context
+def do_eval(expr, context):
+    """Evaluates given Python expression using context as scope."""
+    return eval(expr, context.vals)
+
+
 def do_env(name):
     """Gets the value of an environment variable."""
     return os.getenv(name)

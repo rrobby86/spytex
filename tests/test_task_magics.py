@@ -15,6 +15,23 @@ test_pow_unpickle = task(
 }
 ).equals(81)
 
+test_eval_basic = task(
+{"!eval": "2+2"}
+).equals(4)
+
+test_eval_context = task(
+{
+    "=": {
+        "N": 8
+    },
+    "!eval": "2**N - 1"
+}
+).equals(255)
+
+test_eval_unbound = task(
+{"!eval": "x+2"}
+).raises(NameError)
+
 test_env_foo = task(
 {"!env": "SPYTEX_TEST_FOO"}
 ).equals("foo")
