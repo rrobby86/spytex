@@ -13,6 +13,10 @@ def _compile_dict_vals(mapping: Mapping[Any, Any]) -> Mapping[Any, Definition]:
     return {key: compile(val) for key, val in mapping.items()}
 
 
+def _nameref_or_compile(obj: Any) -> Definition:
+    return NameReference(obj) if isinstance(obj, str) else compile(obj)
+
+
 def compile(obj: Any) -> Definition:
     """Extract a definition from a JSON-like object representation."""
     if isinstance(obj, collections.abc.Mapping):
@@ -54,7 +58,7 @@ def compile(obj: Any) -> Definition:
             callee = obj.pop("!")
             posargs = list(map(compile, obj.pop("*", [])))
             kwargs = _compile_dict_vals(obj)
-            return Call(NameReference(callee), posargs, kwargs)
+            return Call(_nameref_or_compile(callee), posargs, kwargs)
         else:
             return DictDef(_compile_dict_vals(obj))
     elif (isinstance(obj, collections.abc.Sequence)

@@ -4,9 +4,14 @@ from math import pi
 from utils import *
 
 
-# basic calls
-
 test_pow = taskfile("pow.json").equals(9)
+
+test_pow_explicit = task(
+{
+  "!": {".": "pow"},
+  "*": [3, 2]
+}
+).equals(9)
 
 test_date_kw = task(
 {
@@ -34,6 +39,16 @@ test_pow_nested = task(
 }
 ).equals(81)
 
+test_pow_curried = task(
+{
+  "!": {
+    "!": "functools.partial",
+    "*": [{".": "pow"}, 3]
+  },
+  "*": [2]
+}
+).equals(9)
+
 test_list_noarg = task(
 {"!": "list"}
 ).equals([])
@@ -46,8 +61,6 @@ test_ref_pi = task(
 {".": "math.pi"}
 ).equals(pi)
 
-
-# bindings
 test_pow_bind = task(
 {
   "=": {
