@@ -27,7 +27,7 @@ def compile(obj: Any) -> Definition:
                 if key == "sequential":
                     steps = []
                     for step in val:
-                        name = None,
+                        name = None
                         if (isinstance(step, collections.abc.Mapping)
                                 and ":=" in step):
                             step = step.copy()

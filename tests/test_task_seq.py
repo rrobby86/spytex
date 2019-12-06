@@ -42,3 +42,19 @@ test_seq_two_var = task(
   ]
 }
 ).equals(81)
+
+test_seq_unpack = task(
+{
+  "!sequential": [
+    {
+      ":=": ["a", "b"],
+      "!": "divmod",
+      "*": [11, 3]
+    },
+    {
+      "!": "pow",
+      "*": [{"=": "a"}, {"=": "b"}]
+    }
+  ]
+}
+).equals(9)

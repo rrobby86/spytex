@@ -2,6 +2,7 @@
 
 
 from abc import ABC, abstractmethod
+import collections.abc
 from pydoc import locate
 from typing import (Any, Iterable, Mapping, Optional, Sequence, Tuple, Type,
                     Union)
@@ -122,18 +123,22 @@ class ContextBinder(Definition):
         return self.wrapped.resolve(inner_context)
 
 
+_SeqStepType = Tuple[Definition, Union[None, str, Sequence[str]]]
+
 class SequentialRun(Definition):
     """Wraps definitions to be resolved in given order."""
 
     __slots__ = "defs"
 
-    def __init__(self, defs: Sequence[Tuple[Definition, Optional[str]]]):
+    def __init__(self, defs: Sequence[_SeqStepType]):
         self.defs = defs
 
     def resolve(self, context: ResolutionContext):
         result = None
-        for item, name in self.defs:
+        for item, target in self.defs:
             result = item.resolve(context)
-            if name is not None:
-                context = context.update_vals({name: result})
+            if isinstance(target, str):
+                context = context.update_vals({target: result})
+            elif isinstance(target, collections.abc.Sequence):
+                context = context.update_vals(dict(zip(target, result)))
         return result
