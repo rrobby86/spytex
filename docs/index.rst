@@ -15,6 +15,7 @@ Contents:
 
    intro
    basics
+   ctxvals
 
 
 Indices and tables
